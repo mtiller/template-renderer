@@ -7,7 +7,7 @@ import dts from "vite-plugin-dts";
 export default defineConfig({
   plugins: [react(), dts({ include: ["lib"] })],
   build: {
-    copyPublicDir: false,
+    copyPublicDir: true,
     lib: {
       entry: resolve(__dirname, "pkg/index.ts"),
       formats: ["es"],
