@@ -2,21 +2,35 @@ import "./App.css";
 import { TemplateRenderer } from "../pkg";
 import { useEffect, useState } from "react";
 
-const initialTemplate = `# Title
+const initialTemplate = `# \`<TemplateRenderer>\`
 
-## Hello
+## Usage
 
-This is a sample...{{ x }} + {{ y }} = {{ x+y }}
+This widget allows you to write Markdown (potentially mixed with HTML)
 
-- Equation:
+But it does a few more things.  It also:
+- Allows you to evaluate expressions inside {% raw %}\`{{\`{% endraw %} \`...\` {% raw %}\`}}\`{% endraw %}
+- Automatically includes plugins to support math rendering
+- Automatically sanitizes the output
+- Embed custom components (or custom elements)
+
+## Example
+
+If $x={{x}}$ and $y={{y}}$ then...
 
 $$
-x = sin(x)
+x+y={{ x+y }}
 $$
+
+You can also include graphics with embedded expressions, _e.g.,_
 
 <svg width="300" height="130" xmlns="http://www.w3.org/2000/svg">
-  <rect width="200" height="100" x="10" y="10" rx="20" ry="20" fill="blue" />
-</svg>`;
+  <rect width="200" height="100" x="0" y="0" rx="0" ry=0" fill="black"/>
+  <rect width="{{ width | default(80) }}" height="40" x="{{50*s*s+25}}" y="{{10+40*c*c+8*s}}" rx="20" ry="20" fill="blue" />
+</svg>
+
+The variables $s$ and $c$ in the SVG are a sine and cosine wave, respectively.  These are computed behind
+the scenes as functions of time to demonstrate how templating can be used to produce animations.`;
 
 const initialValue = { x: 5, y: 10 };
 
@@ -26,20 +40,39 @@ function App() {
     JSON.stringify(initialValue)
   );
   const [value, setValue] = useState<any>(initialValue);
+  const [time, setTime] = useState<number>(0);
 
+  useEffect(() => {
+    setInterval(() => setTime((time) => time + 0.01), 50);
+  }, []);
   useEffect(() => {
     try {
       const val = JSON.parse(valueText);
-      setValue(val);
+      setValue({ ...val, s: Math.sin(time), c: Math.cos(time), time: time });
     } catch (e) {
       console.error(e);
     }
-  }, [valueText]);
+  }, [valueText, time]);
   return (
-    <div style={{ height: "100vh", width: "100vw", display: "flex" }}>
-      <div style={{ flexGrow: 1, display: "flex", flexDirection: "column" }}>
+    <div
+      style={{
+        height: "100vh",
+        width: "100vw",
+        display: "flex",
+        gap: 5,
+      }}
+    >
+      <div
+        style={{
+          flexGrow: 1,
+          maxWidth: "50vw",
+          display: "flex",
+          flexDirection: "column",
+          gap: 5,
+        }}
+      >
         <textarea
-          style={{ flexGrow: 1 }}
+          style={{ flexGrow: 3 }}
           onChange={(ev) => setTemplate(ev.target.value)}
         >
           {template}
@@ -52,7 +85,7 @@ function App() {
         </textarea>
       </div>
       <TemplateRenderer
-        style={{ flexGrow: 1 }}
+        style={{ marginLeft: "2em", flexGrow: 1, maxWidth: "50vw" }}
         content={template}
         values={value}
       ></TemplateRenderer>
