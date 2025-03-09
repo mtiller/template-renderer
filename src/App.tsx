@@ -43,7 +43,7 @@ function App() {
   const [time, setTime] = useState<number>(0);
 
   useEffect(() => {
-    setInterval(() => setTime((time) => time + 0.01), 50);
+    setInterval(() => setTime((time) => time + 0.03), 50);
   }, []);
   useEffect(() => {
     try {
