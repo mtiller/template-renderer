@@ -6,6 +6,7 @@ export default defineConfig({
   base: "https://mtiller.github.io/template-renderer/",
   plugins: [react()],
   build: {
+    sourcemap: true,
     copyPublicDir: true,
   },
 });

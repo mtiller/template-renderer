@@ -10,7 +10,9 @@ export function useTemplate(template: string, values: Record<string, any>) {
       { ...values, Math: Math },
       (err, result) => {
         if (err) setRendered("Rendering error: " + err.message);
-        else setRendered(result ?? "No rendered output");
+        else {
+          setRendered(result ?? "No rendered output");
+        }
       }
     );
   }, [template, values]);

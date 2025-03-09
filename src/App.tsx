@@ -25,7 +25,7 @@ $$
 You can also include graphics with embedded expressions, _e.g.,_
 
 <svg width="300" height="130" xmlns="http://www.w3.org/2000/svg">
-  <rect width="200" height="100" x="0" y="0" rx="0" ry=0" fill="black"/>
+  <rect width="200" height="100" x="0" y="0" rx="0" ry="0" fill="black"/>
   <rect width="{{ width | default(80) }}" height="40" x="{{50*s*s+25}}" y="{{10+40*c*c+8*s}}" rx="20" ry="20" fill="blue" />
   <circle cx="{{100+20*s}}" cy="{{50+10*c}}" r="6" fill="green" stroke-width="3" stroke="lightgreen"/>
   <circle cx="{{100+20*c}}" cy="{{50+10*s}}" r="5" fill="red" stroke="orange"/>
@@ -41,12 +41,18 @@ function App() {
   const [valueText, setValueText] = useState<string>(
     JSON.stringify(initialValue)
   );
-  const [value, setValue] = useState<any>(initialValue);
+  const [value, setValue] = useState<any>({
+    ...initialValue,
+    s: 0,
+    c: 1,
+    time: 0,
+  });
   const [time, setTime] = useState<number>(0);
 
   useEffect(() => {
     setInterval(() => setTime((time) => time + 0.03), 50);
   }, []);
+
   useEffect(() => {
     try {
       const val = JSON.parse(valueText);
@@ -75,16 +81,14 @@ function App() {
       >
         <textarea
           style={{ flexGrow: 3 }}
+          value={template}
           onChange={(ev) => setTemplate(ev.target.value)}
-        >
-          {template}
-        </textarea>
+        ></textarea>
         <textarea
           style={{ flexGrow: 1 }}
+          value={valueText}
           onChange={(ev) => setValueText(ev.target.value)}
-        >
-          {valueText}
-        </textarea>
+        ></textarea>
       </div>
       <TemplateRenderer
         style={{ marginLeft: "2em", flexGrow: 1, maxWidth: "50vw" }}
