@@ -5,8 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
-    "build:pkg": "tsc --p ./tsconfig.pkg.json && vite build",
+    "build:app": "tsc -b && vite build",
+    "build:pkg": "tsc --p ./tsconfig.pkg.json && vite build --outDir lib",
     "lint": "eslint .",
     "preview": "vite preview"
   },
