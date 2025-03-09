@@ -1,5 +1,5 @@
 import "./App.css";
-import { TemplateRenderer } from "../pkg";
+import { TemplateRenderer } from "../pkg/index.js";
 import { useEffect, useState } from "react";
 
 const initialTemplate = `# \`<TemplateRenderer>\`

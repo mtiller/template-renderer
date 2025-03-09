@@ -74,7 +74,7 @@ const presentationAttributes = [
   "markerEnd",
   "markerMid",
 ];
-const customCompoents: Record<string, string[]> = {
+const customComponents: Record<string, string[]> = {
   /** Custom Elements */
   chart: ["signals"],
   constants: ["signals"],
@@ -294,7 +294,7 @@ const customCompoents: Record<string, string[]> = {
   sphere: ["radius", "solid"],
 };
 
-export const mathSanitizeSchema = {
+export const mathSanitizeSchema: any = {
   ...defaultSchema,
   attributes: {
     ...defaultSchema.attributes,
@@ -303,7 +303,7 @@ export const mathSanitizeSchema = {
       ...["class", "className", "math", "math-display", "style"],
     ],
     img: [...(defaultSchema.attributes?.div ?? []), ...["src", "style"]],
-    ...customCompoents,
+    ...customComponents,
     math: [["xmlns", "http://www.w3.org/1998/Math/MathML"], "display"],
     annotation: ["encoding"],
     span: ["class", "className", "style"],
@@ -322,7 +322,7 @@ export const mathSanitizeSchema = {
   },
   tagNames: [
     ...(defaultSchema.tagNames ?? []),
-    ...Object.keys(customCompoents),
+    ...Object.keys(customComponents),
     "math",
     "semantics",
     "annotation",

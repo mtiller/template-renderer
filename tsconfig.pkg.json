@@ -4,6 +4,9 @@
   "compilerOptions": {
     "jsx": "react-jsx",
     "outDir": "lib",
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "declaration": true,
+    "module": "nodenext",
+    "moduleResolution": "nodenext"
   }
 }

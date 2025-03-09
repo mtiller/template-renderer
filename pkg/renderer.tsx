@@ -1,5 +1,5 @@
-import MarkdownRenderer from "./markdown";
-import { useTemplate } from "./template";
+import MarkdownRenderer from "./markdown.js";
+import { useTemplate } from "./template.js";
 
 export interface TemplateRendererProps {
   content: string;
