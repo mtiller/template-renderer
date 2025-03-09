@@ -15,10 +15,10 @@ export default defineConfig({
   ],
   build: {
     copyPublicDir: false,
-    lib: {
-      entry: resolve(__dirname, "pkg/index.ts"),
-      formats: ["es"],
-    },
+    // lib: {
+    //   entry: resolve(__dirname, "pkg/index.ts"),
+    //   formats: ["es"],
+    // },
     rollupOptions: {
       external: ["react", "react/jsx-runtime"],
     },

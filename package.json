@@ -11,7 +11,7 @@
   "scripts": {
     "prepublishOnly": "npm run build:pkg",
     "dev": "vite",
-    "build:app": "tsc -b && vite build --outDir appdist",
+    "build:app": "tsc --p ./tsconfig.app.json && vite build --config vite-app.config.ts --outDir appdist",
     "build:pkg": "tsc --p ./tsconfig.pkg.json && vite build",
     "lint": "eslint .",
     "preview": "vite preview"
