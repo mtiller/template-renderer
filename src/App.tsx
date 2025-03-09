@@ -27,7 +27,7 @@ You can also include graphics with embedded expressions, _e.g.,_
 <svg width="300" height="130" xmlns="http://www.w3.org/2000/svg">
   <rect width="200" height="100" x="0" y="0" rx="0" ry=0" fill="black"/>
   <rect width="{{ width | default(80) }}" height="40" x="{{50*s*s+25}}" y="{{10+40*c*c+8*s}}" rx="20" ry="20" fill="blue" />
-  <circle cx="{{100+20*s}}" cy="{{50+10*c}}" r="5" fill="green" stroke="lightgreen"/>
+  <circle cx="{{100+20*s}}" cy="{{50+10*c}}" r="6" fill="green" stroke-width="3" stroke="lightgreen"/>
   <circle cx="{{100+20*c}}" cy="{{50+10*s}}" r="5" fill="red" stroke="orange"/>
 </svg>
 

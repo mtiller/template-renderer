@@ -31,6 +31,7 @@ export const MarkdownRenderer = (props: Options) => {
     w?.x3dom?.reload();
   }, [props.children]);
   override.components = { ...props.components, ...(components as any) };
+
   return <Markdown {...override} />;
 };
 
@@ -52,7 +53,7 @@ const presentationAttributes = [
   "events",
   "rendering",
   "stroke",
-  "stroke-width",
+  "strokeWidth",
   "dasharray",
   "dashoffset",
   "style",
@@ -232,7 +233,7 @@ const customComponents: Record<string, string[]> = {
     "spreadmethod",
     ...coreAttributes,
   ],
-  stop: ["stop-color", "stop-opacity", "offset"],
+  stop: ["stop-color", "stopColor", "stop-opacity", "stopOpacity", "offset"],
   textPath: [
     "href",
     "lengthadjust",
@@ -300,10 +301,9 @@ export const mathSanitizeSchema: any = {
     ...defaultSchema.attributes,
     div: [
       ...(defaultSchema.attributes?.div ?? []),
-      ...["class", "className", "math", "math-display", "style"],
+      ...["class", "className", "math", "math-display", "mathDisplay", "style"],
     ],
     img: [...(defaultSchema.attributes?.div ?? []), ...["src", "style"]],
-    ...customComponents,
     math: [["xmlns", "http://www.w3.org/1998/Math/MathML"], "display"],
     annotation: ["encoding"],
     span: ["class", "className", "style"],
@@ -319,6 +319,7 @@ export const mathSanitizeSchema: any = {
       "y",
       ...coreAttributes,
     ],
+    ...customComponents,
   },
   tagNames: [
     ...(defaultSchema.tagNames ?? []),
