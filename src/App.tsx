@@ -2,9 +2,23 @@ import "./App.css";
 import { TemplateRenderer } from "../pkg";
 import { useEffect, useState } from "react";
 
-const initialTemplate = "This is a sample...x = {{ x }}";
+const initialTemplate = `# Title
 
-const initialValue = { x: 5 };
+## Hello
+
+This is a sample...{{ x }} + {{ y }} = {{ x+y }}
+
+- Equation:
+
+$$
+x = sin(x)
+$$
+
+<svg width="300" height="130" xmlns="http://www.w3.org/2000/svg">
+  <rect width="200" height="100" x="10" y="10" rx="20" ry="20" fill="blue" />
+</svg>`;
+
+const initialValue = { x: 5, y: 10 };
 
 function App() {
   const [template, setTemplate] = useState<string>(initialTemplate);
