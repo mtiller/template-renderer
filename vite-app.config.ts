@@ -7,8 +7,5 @@ export default defineConfig({
   plugins: [react()],
   build: {
     copyPublicDir: true,
-    rollupOptions: {
-      external: ["react", "react/jsx-runtime"],
-    },
   },
 });
